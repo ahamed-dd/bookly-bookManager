@@ -6,7 +6,6 @@ import {
   Button,
   Dialog,
   TextField,
-  TextArea,
 } from "@radix-ui/themes";
 import "./styles.css";
 
