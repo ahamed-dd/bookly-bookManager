@@ -251,6 +251,14 @@ export default function Home() {
                   >
                     ✏️
                   </button>
+
+                  <button 
+                      className="icon-button delete"
+                      onClick={() => handleDelete(book.id)}
+                      title="Delete book"
+                    >
+                      🗑️
+                    </button>
                 </div>
                 <h3>{book.book_name}</h3>
                 {book.published_at && <p>{book.published_at}</p>}
