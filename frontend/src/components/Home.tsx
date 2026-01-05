@@ -227,7 +227,7 @@ export default function Home() {
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </div>
-        {filteredBooks.length > 0 && (
+        {filteredBooks.length > 0 ? (
           <div>
             {filteredBooks.map((book) => (
               <div className="box">
@@ -237,8 +237,15 @@ export default function Home() {
                 {book.description && <p>{book.description}</p>}
                 {book.bookmark && <p>{book.bookmark}</p>}
                 <p>{book.choices}</p>
+                {book.choices === "wish" && "📚 Wish to Read"}
+                {book.choices === "read" && "✅ Read"}
+                {book.choices === "favourite" && "⭐ Favourite"}
               </div>
             ))}
+          </div>
+        ) : (
+          <div className="empty-state">
+            <p>No books found. Add your first book above!</p>
           </div>
         )}
       </div>
