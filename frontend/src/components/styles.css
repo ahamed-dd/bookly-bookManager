@@ -1,21 +1,71 @@
+:root {
+  --bg-primary: #F5F5F3;
+  --bg-secondary: #FFFFFF;
+  --bg-input: #FFFFFF;
+  --border-color: #E0E0DD;
+  --text-primary: #1F1F1F;
+  --text-secondary: #666666;
+  --accent-color: #C17A4B;
+  --accent-hover: #A66A3F;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
 .toppage {
   display: flex;
-  border: 8px solid black;
-  width: 100%;
   justify-content: center;
+  padding: 2rem;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
-.bottompage {
+form {
+  width: 100%;
+  max-width: 800px;
   display: flex;
-  width: 100vw;
-  height: 50vh;
-  position: absolute;
-  bottom: 0;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-input);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
 
-.box{
-    height: 50px;
-    width: 100%;
-    border: 8px solid black;
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(193, 122, 75, 0.1);
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary);
 }
