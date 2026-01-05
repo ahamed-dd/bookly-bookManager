@@ -252,11 +252,11 @@ export default function Home() {
               <Button variant="soft" size="3" className="filter-button">
                 {filterChoice === "all"
                   ? "All Books"
-                  : filterChoice === "wish"
+                  : filterChoice === "wish to"
                   ? "Wish to Read"
                   : filterChoice === "read"
                   ? "Read"
-                  : "Favourites"}
+                  : "favourites"}
                 <DropdownMenu.TriggerIcon />
               </Button>
             </DropdownMenu.Trigger>
@@ -264,14 +264,14 @@ export default function Home() {
               <DropdownMenu.Item onClick={() => handleFilterChange("all")}>
                 All Books
               </DropdownMenu.Item>
-              <DropdownMenu.Item onClick={() => handleFilterChange("wish")}>
+              <DropdownMenu.Item onClick={() => handleFilterChange("wish to")}>
                 Wish to Read
               </DropdownMenu.Item>
               <DropdownMenu.Item onClick={() => handleFilterChange("read")}>
                 Read
               </DropdownMenu.Item>
               <DropdownMenu.Item
-                onClick={() => handleFilterChange("favourite")}
+                onClick={() => handleFilterChange("favourites")}
               >
                 Favourites
               </DropdownMenu.Item>
@@ -317,9 +317,9 @@ export default function Home() {
                   <p className="book-bookmark">📖 {book.bookmark}</p>
                 )}
                 <div className="book-badge">
-                  {book.choices === "wish" && "📚 Wish to Read"}
+                  {book.choices === "wish to" && "📚 Wish to Read"}
                   {book.choices === "read" && "✅ Read"}
-                  {book.choices === "favourite" && "⭐ Favourite"}
+                  {book.choices === "favourites" && "⭐ Favourite"}
                 </div>
               </div>
             ))}
@@ -406,8 +406,8 @@ export default function Home() {
                     <input
                       type="radio"
                       name="choices"
-                      value="wish"
-                      checked={editFormData.choices === "wish"}
+                      value="wish to"
+                      checked={editFormData.choices === "wish to"}
                       onChange={handleEditChange}
                     />
                     <span>Wish to Read</span>
@@ -428,8 +428,8 @@ export default function Home() {
                     <input
                       type="radio"
                       name="choices"
-                      value="favourite"
-                      checked={editFormData.choices === "favourite"}
+                      value="favourites"
+                      checked={editFormData.choices === "favourites"}
                       onChange={handleEditChange}
                     />
                     <span>Favourite</span>
