@@ -22,28 +22,48 @@ export default function Home() {
   const [bookData, setbookData] = useState<BookData[]>([])
   const [formData, setFormData] = useState({
   book_name: "",
-  published_date: null as number | null,
+  published_at: null as number | null,
   author: "",
   description: "",
   bookmark: "",
   choices: ""
 })
   const [filterChoice, setFilterChoice] = useState<string>("all")
+  const [editingBook, setEditingBook] = useState<BookData | null>(null);
+  const [editFormData, setEditFormData] = useState<BookData | null>(null);
 
 
   async function getBookData(): Promise<BookData[]> {
     const response = await axios.get(`${BASE_URL}/books/`)
     return response.data
-}
+   }
   
   async function writebookData(data: Omit<BookData, "id">) {
-  const response = await axios.post(`${BASE_URL}/books/`, data)
-  return response.data
-}
+    const response = await axios.post(`${BASE_URL}/books/`, data)
+    return response.data
+    }
+
+  async function updateBookData(id: number, data: Partial<BookData>) {
+   const response = await axios.put(`${BASE_URL}/books/${id}`, data);
+   return response.data;
+   }
   
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
     const { name, value } = e.target  
     setFormData(prev => ({...prev, [name]: value}))      
+  }
+
+  function handleEditChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = e.target;
+    if (editFormData) {
+      setEditFormData({
+        ...editFormData,
+        [name]:
+          name === "published_at" ? (value ? Number(value) : null) : value,
+      });
+    }
   }
 
   async function handleSubmit(e: React.FocusEvent) {
@@ -55,7 +75,7 @@ export default function Home() {
 
     setFormData({
         book_name: "",
-        published_date: null as number | null,
+        published_at: null as number | null,
         author: "",
         description: "",
         bookmark: "",
