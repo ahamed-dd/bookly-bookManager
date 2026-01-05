@@ -2,6 +2,8 @@
 
 A modern book management web application that helps you track your reading journey with an intuitive, Claude-inspired dark interface.
 
+🔗 Live Demo: https://bookly-eux2.onrender.com/
+
 ## Overview
 
 Bookly is a full-stack book tracking application where users can manage their personal library by organizing books into three categories: books they wish to read, books they've already read, and their favorites. The application features a clean, professional UI with real-time CRUD operations and dynamic filtering capabilities.
