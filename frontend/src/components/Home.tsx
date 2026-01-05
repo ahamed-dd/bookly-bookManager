@@ -82,6 +82,18 @@ export default function Home() {
         choices: ""
     })
   }
+
+  async function handleUpdate() {
+    if (editFormData && editingBook) {
+      const updated = await updateBookData(editingBook.id, editFormData);
+      setbookData((prev) =>
+        prev.map((book) => (book.id === editingBook.id ? updated : book))
+      );
+      setEditingBook(null);
+      setEditFormData(null);
+    }
+  }
+
   function handleFilterChange(choice: string) {
   setFilterChoice(choice)
   }
