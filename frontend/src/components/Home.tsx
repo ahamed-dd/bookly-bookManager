@@ -140,6 +140,7 @@ export default function Home() {
       <div className="toppage">
         <div className="form-container">
           <h1 className="app-title">Bookly</h1>
+          <h3 className="app-titletwo">Your Personal Book Manager</h3>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="book_name">Book Name *</label>
@@ -294,14 +295,14 @@ export default function Home() {
                       }}
                       title="Edit book"
                     >
-                      ✏️
+                      Edit
                     </button>
                     <button
                       className="icon-button delete"
                       onClick={() => handleDelete(book.id)}
                       title="Delete book"
                     >
-                      🗑️
+                      Delete
                     </button>
                   </div>
                 </div>
