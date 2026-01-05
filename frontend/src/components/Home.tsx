@@ -128,6 +128,32 @@ export default function Home() {
             onChange={handleChange}
           />
 
+          <input
+            id="published_at"
+            name="published_at"
+            type="number"
+            placeholder="e.g., 2024"
+            value={formData.published_at || ""}
+            onChange={handleChange}
+          />
+
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Book description"
+            value={formData.description}
+            onChange={handleChange}
+            rows={3}
+          />
+
+          <input
+            id="bookmark"
+            name="bookmark"
+            placeholder="Current page or chapter"
+            value={formData.bookmark}
+            onChange={handleChange}
+          />
+
           <button type="submit">Add Book</button>
           <div className="choice-group">
             <p>Choice</p>
