@@ -240,6 +240,18 @@ export default function Home() {
           <div>
             {filteredBooks.map((book) => (
               <div className="box">
+                <div>
+                  <button
+                    className="icon-button"
+                    onClick={() => {
+                      setEditingBook(book);
+                      setEditFormData(book);
+                    }}
+                    title="Edit book"
+                  >
+                    ✏️
+                  </button>
+                </div>
                 <h3>{book.book_name}</h3>
                 {book.published_at && <p>{book.published_at}</p>}
                 {book.author && <p>{book.author}</p>}
@@ -257,6 +269,15 @@ export default function Home() {
             <p>No books found. Add your first book above!</p>
           </div>
         )}
+      </div>
+        <Dialog.Root open={!!editingBook} onOpenChange={(open) => {
+        if (!open) {
+          setEditingBook(null)
+          setEditFormData(null)
+        }
+      }}></Dialog.Root>
+      <div>
+        
       </div>
     </>
   );
