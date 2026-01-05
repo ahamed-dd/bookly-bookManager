@@ -28,6 +28,7 @@ export default function Home() {
   bookmark: "",
   choices: ""
 })
+  const [filterChoice, setFilterChoice] = useState<string>("all")
 
 
   async function getBookData(): Promise<BookData[]> {
@@ -61,6 +62,15 @@ export default function Home() {
         choices: ""
     })
   }
+  function handleFilterChange(choice: string) {
+  setFilterChoice(choice)
+  }
+
+  const filteredBooks = bookData.filter(book => {
+  if (filterChoice === "all") return true
+  return book.choices === filterChoice
+})
+
 
   useEffect(() => {
   getBookData().then(setbookData)
@@ -68,97 +78,112 @@ export default function Home() {
 
 
   return (
-       <>
-       <div className="toppage">
+    <>
+      <div className="toppage">
         <form onSubmit={handleSubmit}>
-            <input
-                name="book_name"
-                placeholder="Book name"
-                value={formData.book_name}
+          <input
+            name="book_name"
+            placeholder="Book name"
+            value={formData.book_name}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            name="author"
+            placeholder="Author"
+            value={formData.author}
+            onChange={handleChange}
+          />
+
+          <button type="submit">Add Book</button>
+          <div className="choice-group">
+            <p>Choice</p>
+
+            <label>
+              <input
+                type="radio"
+                name="choices"
+                value="wish"
+                checked={formData.choices === "wish"}
                 onChange={handleChange}
-                required
-            />
+              />
+              Wish to Read
+            </label>
 
-            <input
-                name="author"
-                placeholder="Author"
-                value={formData.author}
+            <label>
+              <input
+                type="radio"
+                name="choices"
+                value="read"
+                checked={formData.choices === "read"}
                 onChange={handleChange}
-            />
+              />
+              Read
+            </label>
 
-            <button type="submit">Add Book</button>
-            <div className="choice-group">
-                <p>Choice</p>
-
-                <label>
-                    <input
-                    type="radio"
-                    name="choices"
-                    value="wish"
-                    checked={formData.choices === "wish"}
-                    onChange={handleChange}
-                    />
-                    Wish to Read
-                </label>
-
-                <label>
-                    <input
-                    type="radio"
-                    name="choices"
-                    value="read"
-                    checked={formData.choices === "read"}
-                    onChange={handleChange}
-                    />
-                    Read
-                </label>
-
-                <label>
-                    <input
-                    type="radio"
-                    name="choices"
-                    value="favourite"
-                    checked={formData.choices === "favourite"}
-                    onChange={handleChange}
-                    />
-                    Favourite
-                </label>
-            </div>
-
+            <label>
+              <input
+                type="radio"
+                name="choices"
+                value="favourite"
+                checked={formData.choices === "favourite"}
+                onChange={handleChange}
+              />
+              Favourite
+            </label>
+          </div>
         </form>
+      </div>
 
-       </div>
-
-        <div className="bottompage">
-            <div className="book">
-            <DropdownMenu.Root>
-                <DropdownMenu.Trigger>
-                    <Button variant="soft" size="4">
-                        All Books
-                        <DropdownMenu.TriggerIcon />
-                    </Button>
-                </DropdownMenu.Trigger>
-                <DropdownMenu.Content size="2">
-                    <DropdownMenu.Item>Wish to Read</DropdownMenu.Item>
-                    <DropdownMenu.Item>Read</DropdownMenu.Item>
-                    <DropdownMenu.Item>Favourites</DropdownMenu.Item>
-                </DropdownMenu.Content>
-            </DropdownMenu.Root>
-            </div>
-            {bookData.length > 0 && (
-                <div>
-                    {bookData.map(book => (
-                        <div className="box">
-                        <h3>{book.book_name}</h3>
-                        {book.published_at && <p>{book.published_at}</p>}
-                        {book.author && <p>{book.author}</p>}
-                        {book.description && <p>{book.description}</p>}
-                        {book.bookmark && <p>{book.bookmark}</p>}
-                        <p>{book.choices}</p>
-                        </div>
-                    ))}
-                </div>
-            )}
+      <div className="bottompage">
+        <div className="book">
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <Button variant="soft" size="4">
+                {filterChoice === "all"
+                  ? "All Books"
+                  : filterChoice === "wish"
+                  ? "Wish to Read"
+                  : filterChoice === "read"
+                  ? "Read"
+                  : "Favourites"}
+                <DropdownMenu.TriggerIcon />
+              </Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content size="2">
+              <DropdownMenu.Item onClick={() => handleFilterChange("all")}>
+                All Books
+              </DropdownMenu.Item>
+              <DropdownMenu.Item onClick={() => handleFilterChange("wish")}>
+                Wish to Read
+              </DropdownMenu.Item>
+              <DropdownMenu.Item onClick={() => handleFilterChange("read")}>
+                Read
+              </DropdownMenu.Item>
+              <DropdownMenu.Item
+                onClick={() => handleFilterChange("favourite")}
+              >
+                Favourites
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
         </div>
-        </>
-  )
+        {filteredBooks.length > 0 && (
+          <div>
+            {filteredBooks.map((book) => (
+              <div className="box">
+                <h3>{book.book_name}</h3>
+                {book.published_at && <p>{book.published_at}</p>}
+                {book.author && <p>{book.author}</p>}
+                {book.description && <p>{book.description}</p>}
+                {book.bookmark && <p>{book.bookmark}</p>}
+                <p>{book.choices}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  );
 }
