@@ -273,7 +273,7 @@ textarea {
 
 .book-author {
   font-size: 0.95rem;
-  color: var(--accent-light);
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
   font-style: italic;
 }

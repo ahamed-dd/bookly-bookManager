@@ -47,12 +47,12 @@ export default function Home() {
   }
 
   async function updateBookData(id: number, data: Partial<BookData>) {
-    const response = await axios.put(`${BASE_URL}/books/${id}`, data);
+    const response = await axios.put(`${BASE_URL}/books/${id}/`, data);
     return response.data;
   }
 
   async function deleteBookData(id: number) {
-    await axios.delete(`${BASE_URL}/books/${id}`);
+    await axios.delete(`${BASE_URL}/books/${id}/`);
   }
 
   function handleChange(
@@ -179,12 +179,13 @@ export default function Home() {
 
             <div className="form-group">
               <label htmlFor="bookmark">Bookmark</label>
-              <input
+              <textarea
                 id="bookmark"
                 name="bookmark"
-                placeholder="Current page or chapter"
+                placeholder="Favourite Passage or Takeaway from this book"
                 value={formData.bookmark}
                 onChange={handleChange}
+                rows={3}
               />
             </div>
 
