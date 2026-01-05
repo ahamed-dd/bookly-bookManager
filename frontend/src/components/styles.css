@@ -1,0 +1,21 @@
+.toppage {
+  display: flex;
+  border: 8px solid black;
+  width: 100%;
+  justify-content: center;
+}
+
+.bottompage {
+  display: flex;
+  width: 100vw;
+  height: 50vh;
+  position: absolute;
+  bottom: 0;
+}
+
+
+.box{
+    height: 50px;
+    width: 100%;
+    border: 8px solid black;
+}
