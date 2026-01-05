@@ -126,12 +126,12 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost:5173",
-    "<https://your-frontend.onrender.com>"
+    "https://your-frontend.onrender.com"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "<https://your-backend.onrender.com>",
-    "<https://your-frontend.onrender.com>",
+    "https://your-backend.onrender.com",
+    "https://your-frontend.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
