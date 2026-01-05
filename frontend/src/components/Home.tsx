@@ -47,6 +47,10 @@ export default function Home() {
    const response = await axios.put(`${BASE_URL}/books/${id}`, data);
    return response.data;
    }
+
+   async function deleteBookData(id: number) {
+     await axios.delete(`${BASE_URL}/books/${id}`);
+   }
   
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
     const { name, value } = e.target  
@@ -92,6 +96,11 @@ export default function Home() {
       setEditingBook(null);
       setEditFormData(null);
     }
+  }
+
+  async function handleDelete(id: number) {
+    await deleteBookData(id);
+    setbookData((prev) => prev.filter((book) => book.id !== id));
   }
 
   function handleFilterChange(choice: string) {
