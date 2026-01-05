@@ -276,6 +276,121 @@ export default function Home() {
           setEditFormData(null)
         }
       }}></Dialog.Root>
+
+      <Dialog.Content className="dialog-content">
+          <Dialog.Title className="dialog-title">Edit Book</Dialog.Title>
+          {editFormData && (
+            <div className="edit-form">
+              <div className="form-group">
+                <label htmlFor="edit_book_name">Book Name *</label>
+                <input
+                  id="edit_book_name"
+                  name="book_name"
+                  value={editFormData.book_name}
+                  onChange={handleEditChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="edit_author">Author</label>
+                <input
+                  id="edit_author"
+                  name="author"
+                  value={editFormData.author || ""}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="edit_published_at">Published Year</label>
+                <input
+                  id="edit_published_at"
+                  name="published_at"
+                  type="number"
+                  value={editFormData.published_at || ""}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="edit_description">Description</label>
+                <textarea
+                  id="edit_description"
+                  name="description"
+                  value={editFormData.description || ""}
+                  onChange={handleEditChange}
+                  rows={3}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="edit_bookmark">Bookmark</label>
+                <input
+                  id="edit_bookmark"
+                  name="bookmark"
+                  value={editFormData.bookmark || ""}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div className="choice-group">
+                <label>Reading Status</label>
+                <div className="radio-group">
+                  <label className="radio-label">
+                    <input
+                      type="radio"
+                      name="choices"
+                      value="wish"
+                      checked={editFormData.choices === "wish"}
+                      onChange={handleEditChange}
+                    />
+                    <span>Wish to Read</span>
+                  </label>
+
+                  <label className="radio-label">
+                    <input
+                      type="radio"
+                      name="choices"
+                      value="read"
+                      checked={editFormData.choices === "read"}
+                      onChange={handleEditChange}
+                    />
+                    <span>Read</span>
+                  </label>
+
+                  <label className="radio-label">
+                    <input
+                      type="radio"
+                      name="choices"
+                      value="favourite"
+                      checked={editFormData.choices === "favourite"}
+                      onChange={handleEditChange}
+                    />
+                    <span>Favourite</span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="dialog-actions">
+                <Button 
+                  variant="soft" 
+                  color="gray"
+                  onClick={() => {
+                    setEditingBook(null)
+                    setEditFormData(null)
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={handleUpdate}>
+                  Save Changes
+                </Button>
+              </div>
+            </div>
+          )}
+        </Dialog.Content>
+      </Dialog.Root>
       <div>
         
       </div>
