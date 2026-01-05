@@ -20,13 +20,22 @@ type BookData = {
   choices?: string;
 };
 
+type BookPayload = {
+  book_name: string;
+  author?: string;
+  published_at?: number;
+  description?: string;
+  bookmark?: string;
+  choices: string;
+};
+
+
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default function Home() {
   const [bookData, setbookData] = useState<BookData[]>([]);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<BookPayload>({
     book_name: "",
-    published_at: null as number | null,
     author: "",
     description: "",
     bookmark: "",
@@ -80,19 +89,21 @@ export default function Home() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    try {
+      const newbook = await writebookData(formData);
 
-    const newbook = await writebookData(formData);
+      setbookData((prev) => [...prev, newbook]);
 
-    setbookData((prev) => [...prev, newbook]);
-
-    setFormData({
-      book_name: "",
-      published_at: null,
-      author: "",
-      description: "",
-      bookmark: "",
-      choices: "",
-    });
+      setFormData({
+        book_name: "",
+        author: "",
+        description: "",
+        bookmark: "",
+        choices: "read",
+      });
+    } catch (err: any) {
+      console.error(err.response?.data || err);
+    }
   }
 
   async function handleUpdate() {
@@ -196,8 +207,8 @@ export default function Home() {
                   <input
                     type="radio"
                     name="choices"
-                    value="wish"
-                    checked={formData.choices === "wish"}
+                    value="wish to"
+                    checked={formData.choices === "wish to"}
                     onChange={handleChange}
                   />
                   <span>Wish to Read</span>
@@ -218,8 +229,8 @@ export default function Home() {
                   <input
                     type="radio"
                     name="choices"
-                    value="favourite"
-                    checked={formData.choices === "favourite"}
+                    value="favourites"
+                    checked={formData.choices === "favourites"}
                     onChange={handleChange}
                   />
                   <span>Favourite</span>
@@ -356,13 +367,15 @@ export default function Home() {
 
               <div className="form-group">
                 <label htmlFor="edit_published_at">Published Year</label>
-                <input
-                  id="edit_published_at"
-                  name="published_at"
-                  type="number"
-                  value={editFormData.published_at || ""}
-                  onChange={handleEditChange}
-                />
+                <TextField.Root>
+                  <input
+                    id="edit_published_at"
+                    name="published_at"
+                    type="number"
+                    value={editFormData.published_at || ""}
+                    onChange={handleEditChange}
+                  />
+                </TextField.Root>
               </div>
 
               <div className="form-group">
