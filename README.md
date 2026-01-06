@@ -49,7 +49,7 @@ git clone https://github.com/yourusername/bookly.git
 cd bookly
 npm install
 npm run dev
-
+```
 ---
 
 Bookly was built to demonstrate real-world full-stack development — from designing RESTful APIs and database models to building a responsive, type-safe frontend. The project focuses on clean architecture, maintainability, and practical user experience rather than demos or mock features.
